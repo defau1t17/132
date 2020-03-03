@@ -1,96 +1,120 @@
-package com.company;
-
-public class Main {
-
-    public static void main(String[] args) {
-        homeLibrary bookNumberOne = new homeLibrary("Paddington", 1958, "Thomas Michael Bond");
-
-
-
-        System.out.println(bookNumberOne);
-        System.out.println();
-        bookNumberOne.findBookByDate(1958);
-        bookNumberOne.findBookByNameAndDate(1958,"Thomas Michael Bond");
-    }
-
-}
-
-class homeLibrary {
-    public String nameOfTheBook;
-    public String author;
-    public int date;
-
-    public homeLibrary(String nameOfTheBook, int date, String author) {
-        this.author = author;
-        this.date = date;
-        this.nameOfTheBook = nameOfTheBook;
-
-    }
-
-    public int getDate() {
-        return date;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getNameOfTheBook() {
-        return nameOfTheBook;
-    }
-
-    public void findBookByName(String findName) {
-
-        if (this.nameOfTheBook == findName) {
-            System.out.println("Это книга писателя  - " + " '" + this.author + "'" + "\n" + "Под названием - " + " '" + this.nameOfTheBook + "'" + "\n" + "Выпуска - " + this.date + " года");
-        } else {
-            System.out.println("Книга с данными параметрами не найдена");
-        }
-    }
-
-    public void findBookByAuthor(String findAuthor) {
-        if (this.author == findAuthor) {
-            System.out.println("Это книга писателя  - " + " '" + this.author + "'" + "\n" + "Под названием - " + " '" + this.nameOfTheBook + "'" + "\n" + "Выпуска - " + this.date + " года");
-        } else {
-            System.out.println("Книга с данными параметрами не найдена");
-        }
-    }
-
-    public void findBookByDate(int findBookByDate) {
-        if (this.date == findBookByDate) {
-            System.out.println("Это книга писателя  - " + " '" + this.author + "'" + "\n" + "Под названием - " + " '" + this.nameOfTheBook + "'" + "\n" + "Выпуска - " + this.date + " года");
-        } else {
-            System.out.println("Книга с данными параметрами не найдена");
-        }
-
-
-    }
-
-    public void findBookByNameAndDate(int dateOfTheBook, String findBookByName) {
-        if (this.nameOfTheBook == findBookByName && this.date == dateOfTheBook) {
-            System.out.println("Это книга писателя  - " + " '" + this.author + "'" + "\n" + "Под названием - " + " '" + this.nameOfTheBook + "'" + "\n" + "Выпуска - " + this.date + " года");
-        } else {
-            System.out.println("Книга с данными параметрами не найдена");
-        }
-    }
-
-    public void findBookByNameAndAuthor(String findBookByName, String findBookByTheAuthor) {
-        if (this.nameOfTheBook == findBookByName && this.author == findBookByTheAuthor) {
-            System.out.println("Это книга писателя  - " + " '" + this.author + "'" + "\n" + "Под названием - " + " '" + this.nameOfTheBook + "'" + "\n" + "Выпуска - " + this.date + " года");
-        } else {
-            System.out.println("Книга с данными параметрами не найдена");
-        }
-    }
-    public void findBookByAuthorAndDate(int dateOfTheBook,String findBookByTheAuthor ){
-        if(this.date == dateOfTheBook && this.author == findBookByTheAuthor){
-            System.out.println("Это книга писателя  - " + " '" + this.author + "'" + "\n" + "Под названием - " + " '" + this.nameOfTheBook + "'" + "\n" + "Выпуска - " + this.date + " года");
-        } else {
-            System.out.println("Книга с данными параметрами не найдена");
-        }
-
-    }
+    TextField tfNum1;
+    TextField tfNum2;
+    Button btnDivide;
+    Button btnMultiply;
+    Button btnAddition;
+    Button btnSubtraction;
+    Button btnClear;
+    Label lblAnswer;
+    Button divisionWithRemainder;
 
     @Override
-    public String toString() {
-        return "Название книги - " + this.nameOfTheBook + "\n" + "Издатель - " + this.author + "\n" + "Написаная в - " + this.date + " году";
+    public void start(Stage primaryStage) {
+
+        tfNum1 = new TextField();
+        tfNum2 = new TextField();
+        btnDivide = new Button("/");
+        btnMultiply = new Button("*");
+        btnAddition = new Button("+");
+        btnSubtraction = new Button("-");
+        btnClear = new Button("Clear");
+        lblAnswer = new Label("0");
+        divisionWithRemainder = new Button("%");
+        tfNum2.setPromptText("Index 1");
+        tfNum1.setPromptText("Index 2");
+
+        lblAnswer.setAlignment(Pos.CENTER);
+        lblAnswer.setStyle("-fx-border-color: #000; -fx-padding: 5px;");
+
+        GridPane root = new GridPane();
+        root.setAlignment(Pos.CENTER);
+
+        root.setHgap(10);
+        root.setVgap(10);
+
+        root.add(btnDivide, 0, 0);
+        root.add(btnMultiply, 1, 0);
+        root.add(btnAddition, 0, 1);
+        root.add(btnSubtraction, 1, 1);
+        root.add(divisionWithRemainder, 0, 2, 2, 1);
+
+        root.add(tfNum1, 0, 3);
+        root.add(tfNum2, 1, 3);
+        root.add(lblAnswer, 0, 5, 2, 1);
+        root.add(btnClear, 0, 4, 2, 1);
+
+
+        setWidths();
+        attachCode();
+
+        Scene scene = new Scene(root, 400, 300, Color.grayRgb(21));
+        primaryStage.setTitle("CalculatorFX 1.0");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
+
+    private void setWidths() {
+        tfNum1.setPrefWidth(70);
+        tfNum2.setPrefWidth(70);
+        btnDivide.setPrefWidth(70);
+        btnMultiply.setPrefWidth(70);
+        btnAddition.setPrefWidth(70);
+        btnSubtraction.setPrefWidth(70);
+        btnClear.setPrefWidth(150);
+        lblAnswer.setPrefWidth(150);
+        divisionWithRemainder.setPrefWidth(150);
+    }
+
+    public void attachCode() {
+        //have each button run BTNCODE when clicked
+        btnAddition.setOnAction(e -> btncode(e));
+        btnSubtraction.setOnAction(e -> btncode(e));
+        btnMultiply.setOnAction(e -> btncode(e));
+        btnDivide.setOnAction(e -> btncode(e));
+        btnClear.setOnAction(e -> btncode(e));
+        divisionWithRemainder.setOnAction(e -> btncode(e));
+    }
+
+    public void btncode(ActionEvent e) {
+        int num1, num2, answer;
+        char symbol;
+        //e tells us which button was clicked
+        if (e.getSource() == btnClear) {
+            tfNum1.setText("");
+            tfNum2.setText("");
+            lblAnswer.setText("0");
+            tfNum1.requestFocus();
+            return;
+        }
+        //read numbers in from textfields
+        try {
+
+
+            num1 = Integer.parseInt(tfNum1.getText());
+            num2 = Integer.parseInt(tfNum2.getText());
+            if (e.getSource() == btnAddition) {
+                symbol = '+';
+                answer = num1 + num2;
+            } else if (e.getSource() == btnSubtraction) {
+                symbol = '-';
+                answer = num1 - num2;
+            } else if (e.getSource() == btnMultiply) {
+                symbol = 'x';
+                answer = num1 * num2;
+            } else if (e.getSource() == divisionWithRemainder) {
+                symbol = '%';
+                answer = num1 % num2;
+            } else {
+                symbol = '/';
+                answer = num1 / num2;
+            }
+            //display answer
+            lblAnswer.setText("" + num1 + symbol + num2 + "=" + answer);
+        } catch (Exception ex) {
+            lblAnswer.setText("Error");
+
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
