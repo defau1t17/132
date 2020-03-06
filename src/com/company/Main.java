@@ -1,120 +1,230 @@
-    TextField tfNum1;
-    TextField tfNum2;
-    Button btnDivide;
-    Button btnMultiply;
-    Button btnAddition;
-    Button btnSubtraction;
-    Button btnClear;
-    Label lblAnswer;
-    Button divisionWithRemainder;
+        Scanner scanner = new Scanner(System.in);
+        String rightAnswer;
+        int b = 0;
+        int trieCounter = 3;
+        System.out.println("Добро пожаловать в игру 'Угадай загадку' . У вас есть 3-и попытки. Да придет с вами Удача...");
+        String userAnswer;
 
-    @Override
-    public void start(Stage primaryStage) {
+        String riddle1 = "Кто говорит на всех языках?";
+        String riddle2 = "Шесть ног, две головы, а хвост один. Что это такое?";
+        String riddle3 = "Что может в одно и то же время: стоять и ходить,висеть и стоять, ходить и лежать?";
+        String riddle4 = "У квадратного стола отпилили один угол. Сколько теперь углов у него стало?";
+        String riddle5 = "Что было завтра, а будем вчера?";
+        String riddle6 = "Что это такое: синий, большой, с рогами и полностью набит зайцами";
+        String riddle7 = "Между ног болтается, на 'X' называется.";
+        String riddle8 = "Специалист по разбору каракуль врачей?";
+        String riddle9 = "Что поднять земли легко, но трудно кинуть далеко?";
+        String riddle10 = "Стоп-бревно в случае экстренного торможения?";
 
-        tfNum1 = new TextField();
-        tfNum2 = new TextField();
-        btnDivide = new Button("/");
-        btnMultiply = new Button("*");
-        btnAddition = new Button("+");
-        btnSubtraction = new Button("-");
-        btnClear = new Button("Clear");
-        lblAnswer = new Label("0");
-        divisionWithRemainder = new Button("%");
-        tfNum2.setPromptText("Index 1");
-        tfNum1.setPromptText("Index 2");
+        System.out.println("Что ж, начнем!!! ");
 
-        lblAnswer.setAlignment(Pos.CENTER);
-        lblAnswer.setStyle("-fx-border-color: #000; -fx-padding: 5px;");
+        for (int i = 0; i < 1; i++) {
+            b = (int) (Math.random() * 10);
+            for (int c = 0; c < 3; c++) {
+                if (b == 0) {
+                    System.out.println(riddle1);
+                    rightAnswer = "эхо";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
 
-        GridPane root = new GridPane();
-        root.setAlignment(Pos.CENTER);
+                } else if (b == 1) {
+                    System.out.println(riddle2);
+                    rightAnswer = "всадник";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
 
-        root.setHgap(10);
-        root.setVgap(10);
+                } else if (b == 2) {
+                    System.out.println(riddle3);
+                    rightAnswer = "часы";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
 
-        root.add(btnDivide, 0, 0);
-        root.add(btnMultiply, 1, 0);
-        root.add(btnAddition, 0, 1);
-        root.add(btnSubtraction, 1, 1);
-        root.add(divisionWithRemainder, 0, 2, 2, 1);
+                } else if (b == 3) {
+                    System.out.println(riddle4);
+                    rightAnswer = "пять";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
 
-        root.add(tfNum1, 0, 3);
-        root.add(tfNum2, 1, 3);
-        root.add(lblAnswer, 0, 5, 2, 1);
-        root.add(btnClear, 0, 4, 2, 1);
+                } else if (b == 4) {
+                    System.out.println(riddle5);
+                    rightAnswer = "сегодня";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
+
+                } else if (b == 5) {
+                    System.out.println(riddle6);
+                    rightAnswer = "тролейбус";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
+
+                } else if (b == 6) {
+                    System.out.println(riddle7);
+                    rightAnswer = "хвост";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
+
+                } else if (b == 7) {
+                    System.out.println(riddle8);
+                    rightAnswer = "аптекарь";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
+
+                } else if (b == 8) {
+                    System.out.println(riddle9);
+                    rightAnswer = "пух";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
+
+                } else if (b == 10) {
+                    System.out.println(riddle10);
+                    rightAnswer = "столб";
+                    userAnswer = scanner.next();
+                    userAnswer.trim();
+                    userAnswer.toLowerCase();
+                    if (rightAnswer.equals(userAnswer) == true) {
+                        System.out.println("Вы ответили верно!!! Поздравляем вас");
+                        break;
+                    } else if (rightAnswer.equals(userAnswer) == false) {
+                        trieCounter--;
+                        System.out.println("Вы ошиблись! У вас осталось - " + trieCounter + " попыток");
+                        System.out.println("Попробуйте снова :) ");
+                    }
+                    if (trieCounter == 0) {
+                        System.out.println("Количество попыток истеклоюю...");
+                        System.out.println("Правитльный ответ был " + rightAnswer);
+                        break;
+                    }
+                }
 
 
-        setWidths();
-        attachCode();
-
-        Scene scene = new Scene(root, 400, 300, Color.grayRgb(21));
-        primaryStage.setTitle("CalculatorFX 1.0");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    private void setWidths() {
-        tfNum1.setPrefWidth(70);
-        tfNum2.setPrefWidth(70);
-        btnDivide.setPrefWidth(70);
-        btnMultiply.setPrefWidth(70);
-        btnAddition.setPrefWidth(70);
-        btnSubtraction.setPrefWidth(70);
-        btnClear.setPrefWidth(150);
-        lblAnswer.setPrefWidth(150);
-        divisionWithRemainder.setPrefWidth(150);
-    }
-
-    public void attachCode() {
-        //have each button run BTNCODE when clicked
-        btnAddition.setOnAction(e -> btncode(e));
-        btnSubtraction.setOnAction(e -> btncode(e));
-        btnMultiply.setOnAction(e -> btncode(e));
-        btnDivide.setOnAction(e -> btncode(e));
-        btnClear.setOnAction(e -> btncode(e));
-        divisionWithRemainder.setOnAction(e -> btncode(e));
-    }
-
-    public void btncode(ActionEvent e) {
-        int num1, num2, answer;
-        char symbol;
-        //e tells us which button was clicked
-        if (e.getSource() == btnClear) {
-            tfNum1.setText("");
-            tfNum2.setText("");
-            lblAnswer.setText("0");
-            tfNum1.requestFocus();
-            return;
-        }
-        //read numbers in from textfields
-        try {
-
-
-            num1 = Integer.parseInt(tfNum1.getText());
-            num2 = Integer.parseInt(tfNum2.getText());
-            if (e.getSource() == btnAddition) {
-                symbol = '+';
-                answer = num1 + num2;
-            } else if (e.getSource() == btnSubtraction) {
-                symbol = '-';
-                answer = num1 - num2;
-            } else if (e.getSource() == btnMultiply) {
-                symbol = 'x';
-                answer = num1 * num2;
-            } else if (e.getSource() == divisionWithRemainder) {
-                symbol = '%';
-                answer = num1 % num2;
-            } else {
-                symbol = '/';
-                answer = num1 / num2;
             }
-            //display answer
-            lblAnswer.setText("" + num1 + symbol + num2 + "=" + answer);
-        } catch (Exception ex) {
-            lblAnswer.setText("Error");
-
         }
-    }
 
-    public static void main(String[] args) {
-        launch(args);
+
+    }
