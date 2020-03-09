@@ -1,0 +1,451 @@
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.text.*;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+
+
+import java.util.Scanner;
+
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        String riddle1 = "Кто говорит на всех языках?";
+        String riddle2 = "Шесть ног, две головы, а хвост один. Что это такое?";
+        String riddle3 = "Что может в одно и то же время: стоять и ходить,висеть и стоять, ходить и лежать?";
+        String riddle4 = "У квадратного стола отпилили один угол. Сколько теперь углов у него стало?";
+        String riddle5 = "Что было завтра, а будем вчера?";
+        String riddle6 = "Что это такое: синий, большой, с рогами и полностью набит зайцами";
+        String riddle7 = "Между ног болтается, на 'X' называется.";
+        String riddle8 = "Специалист по разбору каракуль врачей?";
+        String riddle9 = "Что поднять с земли легко, но трудно кинуть далеко?";
+        String riddle10 = "Стоп-бревно в случае экстренного торможения?";
+//TextFields
+        TextField userAnswerTextField = new TextField();
+        userAnswerTextField.setPromptText("Ваш ответ...");
+        userAnswerTextField.setPrefWidth(200);
+
+//labels
+        Label label = new Label("Добро пожаловать в игру 'Угадай загадку' ." + "\n" + "У вас есть 3-и попытки. Да придет с вами Удача...");
+        Label letsStartGame = new Label("Давайте начнем игру!!!");
+        Label riddle = new Label("Ваша загадка :");
+        Label riddleForUser = new Label();
+        Label userAnswerLabel = new Label();
+        Label userTry = new Label();
+        Label userAnswer = new Label("Ваш ответ :");
+        Label giveUpLable = new Label("Вы проиграли...");
+        //label realization
+        label.setFont(Font.font(14));
+        label.setTextFill(Color.rgb(0, 0, 0));
+        letsStartGame.setFont(Font.font(16));
+        riddle.setFont(Font.font(16));
+        riddleForUser.setFont(Font.font(16));
+        userAnswer.setFont(Font.font(16));
+        riddleForUser.setFont(Font.font(16));
+        giveUpLable.setFont(Font.font(35));
+
+        //buttons
+
+        Button startButtond = new Button("Click to Start");
+        startButtond.setPrefWidth(300);
+        startButtond.setPrefHeight(25);
+        Button answer = new Button("Ответить");
+        answer.setPrefWidth(200);
+        answer.setPrefHeight(30);
+        Button giveUp = new Button("Сдаюсь");
+        giveUp.setPrefWidth(200);
+        giveUp.setPrefHeight(30);
+
+        Button tryAgain = new Button("Попробовать снова");
+        tryAgain.setFont(Font.font(20));
+
+
+//gridPanes
+
+        GridPane gridPane1 = new GridPane();
+        GridPane gridPane2 = new GridPane();
+        GridPane gridPane3 = new GridPane();
+        gridPane1.setHgap(10);
+        gridPane1.setVgap(20);
+
+        gridPane2.setHgap(20);
+        gridPane2.setVgap(20);
+
+        gridPane3.setHgap(20);
+        gridPane3.setVgap(20);
+
+        gridPane1.add(label, 4, 8);
+        gridPane1.add(startButtond, 4, 10);
+
+        gridPane2.add(letsStartGame, 2, 0, 1, 1);
+        gridPane2.add(riddle, 1, 1, 2, 1);
+        gridPane2.add(riddleForUser, 1, 2, 2, 2);
+        gridPane2.add(userAnswerLabel, 1, 4, 2, 2);
+        gridPane2.add(userTry, 1, 6, 2, 1);
+        gridPane2.add(userAnswer, 0, 7, 1, 1);
+        gridPane2.add(userAnswerTextField, 2, 7);
+        gridPane2.add(answer, 2, 9, 2, 1);
+        gridPane2.add(giveUp, 2, 10, 3, 1);
+
+        gridPane3.add(giveUpLable, 4, 8, 2, 1);
+        gridPane3.add(tryAgain, 5, 12);
+        Scene scene1 = new Scene(gridPane1, 400, 400);
+        Scene scene2 = new Scene(gridPane2, 400, 400);
+        Scene scene3 = new Scene(gridPane3, 400, 400);
+        primaryStage.setScene(scene1);
+
+
+        int b = (int) (Math.random() * 9);
+        if (b == 0) {
+            riddleForUser.setText(riddle1);
+        } else if (b == 1) {
+            riddleForUser.setText(riddle2);
+        } else if (b == 2) {
+            riddleForUser.setText(riddle3);
+        } else if (b == 3) {
+            riddleForUser.setText(riddle4);
+        } else if (b == 4) {
+            riddleForUser.setText(riddle5);
+        } else if (b == 5) {
+            riddleForUser.setText(riddle6);
+        } else if (b == 6) {
+            riddleForUser.setText(riddle7);
+        } else if (b == 7) {
+            riddleForUser.setText(riddle8);
+        } else if (b == 8) {
+            riddleForUser.setText(riddle9);
+        } else if (b == 9) {
+            riddleForUser.setText(riddle10);
+        }
+
+        startButtond.setOnAction(start -> {
+            primaryStage.setScene(scene2);
+
+        });
+        giveUp.setOnAction(giveUps -> {
+            primaryStage.setScene(scene3);
+            userTry.setText("");
+            userAnswerLabel.setText("");
+            userAnswerTextField.setText("");
+            riddleForUser.setText("");
+        });
+        tryAgain.setOnAction(set -> {
+            primaryStage.setScene(scene2);
+            userTry.setText("");
+            userAnswerLabel.setText("");
+            int c = (int) (Math.random() * 9);
+            if (c == 0) {
+                riddleForUser.setText(riddle1);
+            } else if (c == 1) {
+                riddleForUser.setText(riddle2);
+            } else if (b == 2) {
+                riddleForUser.setText(riddle3);
+            } else if (b == 3) {
+                riddleForUser.setText(riddle4);
+            } else if (c == 4) {
+                riddleForUser.setText(riddle5);
+            } else if (c == 5) {
+                riddleForUser.setText(riddle6);
+            } else if (c == 6) {
+                riddleForUser.setText(riddle7);
+            } else if (c == 7) {
+                riddleForUser.setText(riddle8);
+            } else if (c == 8) {
+                riddleForUser.setText(riddle9);
+            } else if (c == 9) {
+                riddleForUser.setText(riddle10);
+            }
+            String stringAnswer = userAnswerTextField.getText().trim().toLowerCase();
+            int tries = 3;
+            for (int i = 0; i < 2; i++) {
+                if (c == 0) {
+                    String rightAnswer = "эхо";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (c == 1) {
+                    String rightAnswer = "всадник";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (c == 2) {
+                    String rightAnswer = "часы";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (c == 3) {
+                    String rightAnswer = "пять";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (c == 4) {
+                    String rightAnswer = "сегодня";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (c == 5) {
+                    String rightAnswer = "тролейбус";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (c == 6) {
+                    String rightAnswer = "хвост";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (c == 7) {
+                    String rightAnswer = "аптекарь";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (c == 8) {
+                    String rightAnswer = "пух";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (c == 9) {
+                    String rightAnswer = "столб";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                }
+            }
+        });
+
+        primaryStage.show();
+
+        answer.setOnAction(set -> {
+            String stringAnswer = userAnswerTextField.getText().trim().toLowerCase();
+            int tries = 3;
+                if (b == 0) {
+                    String rightAnswer = "эхо";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (b == 1) {
+                    String rightAnswer = "всадник";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (b == 2) {
+                    String rightAnswer = "часы";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (b == 3) {
+                    String rightAnswer = "пять";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (b == 4) {
+                    String rightAnswer = "сегодня";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (b == 5) {
+                    String rightAnswer = "тролейбус";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (b == 6) {
+                    String rightAnswer = "хвост";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (b == 7) {
+                    String rightAnswer = "аптекарь";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (b == 8) {
+                    String rightAnswer = "пух";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                } else if (b == 9) {
+                    String rightAnswer = "столб";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        tries--;
+                        userAnswerLabel.setText("Ваш ответ не верен :(");
+                        userTry.setText("Количество ваших попыток - " + tries);
+                    }
+                    if (tries == 0) {
+                        primaryStage.setScene(scene3);
+                    }
+                }
+        });
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
+
+    }
+
+
+}
