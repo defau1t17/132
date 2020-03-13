@@ -1,0 +1,15 @@
+Label label =new Label();
+        Date date = new Date();
+        label.setFont(Font.font(80));
+        if (date.getHours() > 15 || date.getHours() < 1) {
+            label.setText(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " PM");
+        } else if (date.getHours() < 1 || date.getHours() < 15) {
+            label.setText(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " AM");
+        }
+        Pane pane = new Pane();
+        pane.getChildren().add(label);
+
+        primaryStage.setTitle("Global Time");
+        primaryStage.setScene(new Scene(pane, 450, 120));
+        primaryStage.show();
+    }
