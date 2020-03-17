@@ -1,4 +1,33 @@
-   int tries = 3;
+package sample;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+import javafx.event.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
+import javax.swing.text.View;
+
+public class Main extends Application {
+
+    int tries = 3;
     int secondTries = 3;
     int b = (int) (Math.random() * 9);
     int c = (int) (Math.random() * 9);
@@ -13,7 +42,7 @@
         String riddle5 = "Что было завтра, а будем вчера?";
         String riddle6 = "Что это такое: " + "\n" + " синий, большой, с рогами и полностью набит зайцами";
         String riddle7 = "Между ног болтается, на 'X' называется.";
-        String riddle8 = "Специалист по разбору каракуль врачей?";
+        String riddle8 = "Специалист по разбору " + "\n" + "каракуль врачей?";
         String riddle9 = "Что поднять с земли легко," + " \n" + "но трудно кинуть далеко?";
         String riddle10 = "Стоп-бревно в случае экстренного торможения?";
 //TextFields
@@ -77,7 +106,7 @@
         gridPane1.setHgap(10);
         gridPane1.setVgap(20);
 
-        gridPane2.setHgap(20);
+        gridPane2.setHgap(40);
         gridPane2.setVgap(20);
 
         gridPane3.setHgap(20);
@@ -90,14 +119,14 @@
 
         gridPane2.add(letsStartGame, 2, 0, 1, 1);
         gridPane2.add(riddle, 0, 1, 2, 1);
-        gridPane2.add(riddleForUser, 1, 2, 2, 2);
+        gridPane2.add(riddleForUser, 1, 2, 4, 2);
         gridPane2.add(userAnswerLabel, 1, 4, 2, 2);
         gridPane2.add(userTry, 1, 6, 2, 1);
         gridPane2.add(userAnswer, 0, 7, 1, 1);
         gridPane2.add(userAnswerTextField, 2, 7);
-        gridPane2.add(answer, 2, 9, 2, 1);
-        gridPane2.add(giveUp, 2, 10, 3, 1);
-        gridPane2.add(exit, 0, 10, 1, 1);
+        gridPane2.add(answer, 2, 8, 2, 1);
+        gridPane2.add(giveUp, 2, 9, 3, 1);
+        gridPane2.add(exit, 4, 9, 1, 1);
 
         gridPane3.add(giveUpLable, 4, 5, 6, 2);
         gridPane3.add(tryAgain, 5, 9);
@@ -105,20 +134,130 @@
 
 
         Scene scene1 = new Scene(gridPane1, 400, 400);
-        Scene scene2 = new Scene(gridPane2, 550, 400);
+        Scene scene2 = new Scene(gridPane2, 700, 400);
         Scene scene3 = new Scene(gridPane3, 500, 400);
         Scene endScene = new Scene(gridPane4, 400, 100);
         primaryStage.setScene(scene1);
-
+        primaryStage.setResizable(false);
 
         exit1.setOnAction(set -> {
-            primaryStage.close();
+            Label secondLabel = new Label("Вы уверены что хотите выйти?");
+            secondLabel.setFont(Font.font(16));
+            Button yes = new Button("Да");
+            Button nope = new Button("Нет");
+            Group group = new Group();
+            group.getChildren().add(yes);
+            group.getChildren().add(nope);
+            group.getChildren().add(secondLabel);
+
+            yes.setLayoutX(50);
+            yes.setLayoutY(60);
+            nope.setLayoutX(300);
+            nope.setLayoutY(60);
+            secondLabel.setLayoutY(20);
+            secondLabel.setLayoutX(100);
+            yes.setPrefWidth(50);
+            nope.setPrefWidth(50);
+
+            StackPane secondaryLayout = new StackPane();
+
+            Scene secondScene = new Scene(group, 400, 100);
+
+            // New window (Stage)
+            Stage newWindow = new Stage();
+            newWindow.setTitle("Second Stage");
+            newWindow.setScene(secondScene);
+
+            // Set position of second window, related to primary window.
+
+            yes.setOnAction(setq -> {
+                primaryStage.close();
+                newWindow.close();
+            });
+            nope.setOnAction(setq -> {
+                newWindow.close();
+            });
+            newWindow.setResizable(false);
+            newWindow.show();
         });
         exit.setOnAction(set -> {
-            primaryStage.close();
+            Label secondLabel = new Label("Вы уверены что хотите выйти?");
+            secondLabel.setFont(Font.font(16));
+            Button yes = new Button("Да");
+            Button nope = new Button("Нет");
+            Group group = new Group();
+            group.getChildren().add(yes);
+            group.getChildren().add(nope);
+            group.getChildren().add(secondLabel);
+
+            yes.setLayoutX(50);
+            yes.setLayoutY(60);
+            nope.setLayoutX(300);
+            nope.setLayoutY(60);
+            secondLabel.setLayoutY(20);
+            secondLabel.setLayoutX(100);
+            yes.setPrefWidth(50);
+            nope.setPrefWidth(50);
+
+            StackPane secondaryLayout = new StackPane();
+
+            Scene secondScene = new Scene(group, 400, 100);
+
+            // New window (Stage)
+            Stage newWindow = new Stage();
+            newWindow.setTitle("Second Stage");
+            newWindow.setScene(secondScene);
+
+            // Set position of second window, related to primary window.
+            yes.setOnAction(setq -> {
+                primaryStage.close();
+                newWindow.close();
+            });
+            nope.setOnAction(setq -> {
+                newWindow.close();
+            });
+            newWindow.setResizable(false);
+            newWindow.show();
         });
         exit2.setOnAction(set -> {
-            primaryStage.close();
+            Label secondLabel = new Label("Вы уверены что хотите выйти?");
+            secondLabel.setFont(Font.font(16));
+            Button yes = new Button("Да");
+            Button nope = new Button("Нет");
+            Group group = new Group();
+            group.getChildren().add(yes);
+            group.getChildren().add(nope);
+            group.getChildren().add(secondLabel);
+
+            yes.setLayoutX(50);
+            yes.setLayoutY(60);
+            nope.setLayoutX(300);
+            nope.setLayoutY(60);
+            secondLabel.setLayoutY(20);
+            secondLabel.setLayoutX(100);
+            yes.setPrefWidth(50);
+            nope.setPrefWidth(50);
+
+            StackPane secondaryLayout = new StackPane();
+
+            Scene secondScene = new Scene(group, 400, 100);
+
+            // New window (Stage)
+            Stage newWindow = new Stage();
+            newWindow.setTitle("Second Stage");
+            newWindow.setScene(secondScene);
+
+            // Set position of second window, related to primary window.
+
+            yes.setOnAction(setq -> {
+                primaryStage.close();
+                newWindow.close();
+            });
+            nope.setOnAction(setq -> {
+                newWindow.close();
+            });
+            newWindow.setResizable(false);
+            newWindow.show();
         });
         startButtond.setOnAction(start -> {
 
@@ -151,10 +290,15 @@
             userAnswerLabel.setText("");
             userAnswerTextField.setText("");
             riddleForUser.setText("");
+            rerand.setVisible(false);
         });
 
         tryAgain.setOnAction(set -> {
             primaryStage.setScene(scene2);
+            tries = 3;
+            rerand.setVisible(false);
+            userTry.setText("");
+            userAnswerLabel.setText("");
             b = (int) (Math.random() * 9);
             if (b == 0) {
                 riddleForUser.setText(riddle1);
@@ -187,7 +331,9 @@
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
                     userAnswerLabel.setText("Вы выиграли!!!");
-                    gridPane2.add(rerand, 7, 9);
+                    userAnswerTextField.setText("");
+                    gridPane2.add(rerand, 5, 9);
+                    rerand.setVisible(true);
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -198,7 +344,7 @@
                             System.out.println(tries);
                             if (tries == 0) {
                                 primaryStage.setScene(scene3);
-                                tries = 3;
+                                userAnswerLabel.setText("");
                             }
                         }
 
@@ -211,8 +357,10 @@
                 String rightAnswer = "всадник";
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
-                    gridPane2.add(rerand, 7, 9);
+                    gridPane2.add(rerand, 5, 9);
                     userAnswerLabel.setText("Вы выиграли!!!");
+                    rerand.setVisible(true);
+                    userAnswerTextField.setText("");
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -232,8 +380,10 @@
                 String rightAnswer = "часы";
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
-                    gridPane2.add(rerand, 7, 9);
+                    gridPane2.add(rerand, 5, 9);
                     userAnswerLabel.setText("Вы выиграли!!!");
+                    rerand.setVisible(true);
+                    userAnswerTextField.setText("");
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -255,8 +405,10 @@
                 String rightAnswer = "пять";
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
-                    gridPane2.add(rerand, 7, 9);
+                    gridPane2.add(rerand, 5, 9);
                     userAnswerLabel.setText("Вы выиграли!!!");
+                    rerand.setVisible(true);
+                    userAnswerTextField.setText("");
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -276,8 +428,10 @@
                 String rightAnswer = "сегодня";
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
-                    gridPane2.add(rerand, 7, 9);
+                    gridPane2.add(rerand, 5, 9);
                     userAnswerLabel.setText("Вы выиграли!!!");
+                    rerand.setVisible(true);
+                    userAnswerTextField.setText("");
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -297,8 +451,10 @@
                 String rightAnswer = "тролейбус";
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
-                    gridPane2.add(rerand, 7, 9);
+                    gridPane2.add(rerand, 5, 9);
                     userAnswerLabel.setText("Вы выиграли!!!");
+                    rerand.setVisible(true);
+                    userAnswerTextField.setText("");
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -318,8 +474,10 @@
                 String rightAnswer = "хвост";
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
-                    gridPane2.add(rerand, 7, 9);
+                    gridPane2.add(rerand, 5, 9);
                     userAnswerLabel.setText("Вы выиграли!!!");
+                    rerand.setVisible(true);
+                    userAnswerTextField.setText("");
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -339,8 +497,10 @@
                 String rightAnswer = "аптекарь";
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
-                    gridPane2.add(rerand, 7, 9);
+                    gridPane2.add(rerand, 5, 9);
                     userAnswerLabel.setText("Вы выиграли!!!");
+                    rerand.setVisible(true);
+                    userAnswerTextField.setText("");
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -352,6 +512,7 @@
                             if (tries == 0) {
                                 primaryStage.setScene(scene3);
                                 tries = 3;
+
                             }
                         }
                     }
@@ -360,8 +521,11 @@
                 String rightAnswer = "пух";
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
-                    gridPane2.add(rerand, 7, 9);
+                    gridPane2.add(rerand, 5, 9);
                     userAnswerLabel.setText("Вы выиграли!!!");
+                    rerand.setVisible(true);
+                    userAnswerTextField.setText("");
+
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -381,8 +545,10 @@
                 String rightAnswer = "столб";
                 if (rightAnswer.equals(stringAnswer) == true) {
                     userTry.setText("");
-                    gridPane2.add(rerand, 7, 9);
+                    gridPane2.add(rerand, 5, 9);
                     userAnswerLabel.setText("Вы выиграли!!!");
+                    rerand.setVisible(true);
+                    userAnswerTextField.setText("");
                 } else if (rightAnswer.equals(stringAnswer) == false) {
                     for (int gc = 0; gc < 1; gc++) {
                         if (rightAnswer != stringAnswer) {
@@ -406,7 +572,7 @@
             riddleForUser.setText("");
             userAnswerLabel.setText("");
             userAnswerTextField.setText("");
-
+            rerand.setVisible(false);
             b = (int) (Math.random() * 9);
 
             if (b == 0) {
@@ -430,5 +596,255 @@
             } else if (b == 9) {
                 riddleForUser.setText(riddle10);
             }
+            answer.setOnAction(set -> {
+                String stringAnswer = userAnswerTextField.getText().trim().toLowerCase();
+
+                if (b == 0) {
+                    String rightAnswer = "эхо";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+                        userAnswerLabel.setText("Вы выиграли!!!");
+//                        gridPane2.add(rerand, 7, 9);
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    userAnswerLabel.setText("");
+                                }
+                            }
+
+                        }
+                    }
+                    if (stringAnswer == "") {
+                        tries = tries;
+                    }
+                } else if (b == 1) {
+                    String rightAnswer = "всадник";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+//                        gridPane2.add(rerand, 7, 9);
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                        rerand.setVisible(true);
+                        userAnswerTextField.setText("");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    tries = 3;
+                                }
+                            }
+                        }
+                    }
+                } else if (b == 2) {
+                    String rightAnswer = "часы";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+//                        gridPane2.add(rerand, 7, 9);
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                        rerand.setVisible(true);
+                        userAnswerTextField.setText("");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    tries = 3;
+                                }
+                            }
+
+                        }
+                    }
+
+                } else if (b == 3) {
+                    String rightAnswer = "пять";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+//                        gridPane2.add(rerand, 7, 9);
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                        rerand.setVisible(true);
+                        userAnswerTextField.setText("");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    tries = 3;
+                                }
+                            }
+                        }
+                    }
+                } else if (b == 4) {
+                    String rightAnswer = "сегодня";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+//                        gridPane2.add(rerand, 7, 9);
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                        rerand.setVisible(true);
+                        userAnswerTextField.setText("");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    tries = 3;
+                                }
+                            }
+                        }
+                    }
+                } else if (b == 5) {
+                    String rightAnswer = "тролейбус";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+//                        gridPane2.add(rerand, 7, 9);
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                        rerand.setVisible(true);
+                        userAnswerTextField.setText("");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    tries = 3;
+                                }
+                            }
+                        }
+                    }
+                } else if (b == 6) {
+                    String rightAnswer = "хвост";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+//                        gridPane2.add(rerand, 7, 9);
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                        rerand.setVisible(true);
+                        userAnswerTextField.setText("");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    tries = 3;
+                                }
+                            }
+                        }
+                    }
+                } else if (b == 7) {
+                    String rightAnswer = "аптекарь";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+//                        gridPane2.add(rerand, 7, 9);
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                        rerand.setVisible(true);
+                        userAnswerTextField.setText("");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    tries = 3;
+                                }
+                            }
+                        }
+                    }
+                } else if (b == 8) {
+                    String rightAnswer = "пух";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+//                        gridPane2.add(rerand, 7, 9);
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                        rerand.setVisible(true);
+                        userAnswerTextField.setText("");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    tries = 3;
+                                }
+                            }
+                        }
+                    }
+                } else if (b == 9) {
+                    String rightAnswer = "столб";
+                    if (rightAnswer.equals(stringAnswer) == true) {
+                        userTry.setText("");
+//                        gridPane2.add(rerand, 7, 9);
+                        userAnswerLabel.setText("Вы выиграли!!!");
+                        rerand.setVisible(true);
+                        userAnswerTextField.setText("");
+                    } else if (rightAnswer.equals(stringAnswer) == false) {
+                        for (int gc = 0; gc < 1; gc++) {
+                            if (rightAnswer != stringAnswer) {
+                                tries--;
+                                userAnswerLabel.setText("Ваш ответ не верен :(");
+                                userTry.setText("Количество ваших попыток - " + tries);
+                                userAnswerTextField.setText("");
+                                System.out.println(tries);
+                                if (tries == 0) {
+                                    primaryStage.setScene(scene3);
+                                    tries = 3;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+            });
         });
         primaryStage.show();
+//        primaryStage.setMaximized(true);
+
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
